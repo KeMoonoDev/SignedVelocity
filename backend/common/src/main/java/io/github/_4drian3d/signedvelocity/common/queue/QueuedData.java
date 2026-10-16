@@ -36,7 +36,7 @@ public final class QueuedData {
     private CompletableFuture<SignedResult> futureFrom(final @Nullable SignedResult result) {
         if (result == null) {
             final CompletableFuture<SignedResult> future = new CompletableFuture<>();
-            future.completeOnTimeout(SignedResult.allowed(), timeout, TimeUnit.MILLISECONDS);
+            future.completeOnTimeout(SignedResult.cancel(), timeout, TimeUnit.MILLISECONDS);
             unSyncronizedQueue.add(future);
             return future;
         } else {
