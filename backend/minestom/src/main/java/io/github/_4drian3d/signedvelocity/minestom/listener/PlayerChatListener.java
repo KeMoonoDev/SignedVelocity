@@ -27,7 +27,7 @@ public final class PlayerChatListener implements Consumer<PlayerChatEvent> {
     public void accept(final PlayerChatEvent event) {
         final Player player = event.getPlayer();
         SignedVelocity.chatQueue().dataFrom(player.getUuid())
-                .nextResult()
+                .nextResult(false)
                 .thenAccept(result -> {
                     if (result.cancelled()) {
                         event.setCancelled(true);

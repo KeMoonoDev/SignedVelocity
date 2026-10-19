@@ -30,7 +30,7 @@ public final class DecorateChatListener implements SignedListener<PlayerChatEven
         event.cause()
                 .first(ServerPlayer.class)
                 .ifPresent(player -> this.chatQueue.dataFrom(player.uniqueId())
-                        .nextResultWithoutAdvance()
+                        .nextResultWithoutAdvance(false)
                         .thenAccept(result -> {
                             final String modifiedChat = result.toModify();
                             if (modifiedChat != null) {

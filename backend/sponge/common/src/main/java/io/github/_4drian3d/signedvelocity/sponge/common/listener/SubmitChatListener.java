@@ -34,7 +34,7 @@ public final class SubmitChatListener implements SignedListener<PlayerChatEvent.
         event.cause()
                 .first(ServerPlayer.class)
                 .ifPresent(player -> this.chatQueue.dataFrom(player.uniqueId())
-                        .nextResult()
+                        .nextResult(false)
                         .thenAccept(result -> {
                             if (result.cancelled()) {
                                 event.setCancelled(true);

@@ -44,7 +44,7 @@ public abstract class PlayerListMixin {
         ci.cancel();
 
         SignedVelocity.CHAT_QUEUE.dataFrom(sender.getUUID())
-                .nextResult()
+                .nextResult(false)
                 .thenAccept(result ->
                     server.execute(() -> {
                         if (result.cancelled()) {

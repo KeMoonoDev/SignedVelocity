@@ -12,7 +12,7 @@ public final class PlayerCommandListener implements Consumer<PlayerCommandEvent>
     public void accept(final PlayerCommandEvent event) {
         final Player player = event.getPlayer();
         SignedVelocity.commandQueue().dataFrom(player.getUuid())
-                .nextResult()
+                .nextResult(true)
                 .thenAccept(result -> {
                     if (result.cancelled()) {
                         event.setCancelled(true);

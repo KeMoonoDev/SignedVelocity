@@ -23,20 +23,20 @@ public final class QueuedData {
         this.results.add(result);
     }
 
-    public CompletableFuture<SignedResult> nextResult() {
+    public CompletableFuture<SignedResult> nextResult(boolean isCommand) {
         final SignedResult result = results.poll();
-        return futureFrom(result);
+        return futureFrom(result, isCommand);
     }
 
-    public CompletableFuture<SignedResult> nextResultWithoutAdvance() {
+    public CompletableFuture<SignedResult> nextResultWithoutAdvance(boolean isCommand) {
         final SignedResult result = results.peek();
-        return futureFrom(result);
+        return futureFrom(result, isCommand);
     }
 
-    private CompletableFuture<SignedResult> futureFrom(final @Nullable SignedResult result) {
+    private CompletableFuture<SignedResult> futureFrom(final @Nullable SignedResult result, boolean isCommand) {
         if (result == null) {
             final CompletableFuture<SignedResult> future = new CompletableFuture<>();
-            future.completeOnTimeout(SignedResult.cancel(), timeout, TimeUnit.MILLISECONDS);
+            future.completeOnTimeout(isCommand ? SignedResult.allowed() : SignedResult.cancel(), timeout, TimeUnit.MILLISECONDS);
             unSyncronizedQueue.add(future);
             return future;
         } else {

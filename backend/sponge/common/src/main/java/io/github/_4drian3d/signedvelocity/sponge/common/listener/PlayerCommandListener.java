@@ -34,7 +34,7 @@ public final class PlayerCommandListener implements SignedListener<ExecuteComman
         event.cause()
                 .first(ServerPlayer.class)
                 .ifPresent(player -> this.commandQueue.dataFrom(player.uniqueId())
-                        .nextResult()
+                        .nextResult(true)
                         .thenAccept(result -> {
                             if (result.cancelled()) {
                                 event.setCancelled(true);

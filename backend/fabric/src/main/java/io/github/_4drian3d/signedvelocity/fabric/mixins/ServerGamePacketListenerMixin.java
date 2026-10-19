@@ -39,7 +39,7 @@ public abstract class ServerGamePacketListenerMixin {
     ci.cancel();
 
     SignedVelocity.COMMAND_QUEUE.dataFrom(player.getUUID())
-        .nextResult()
+        .nextResult(true)
         .thenAccept(result ->
           ((ServerCommonPacketListenerImplAccessor) (Object) this).signedVelocity$getServer()
               .execute(() -> {
@@ -75,7 +75,7 @@ public abstract class ServerGamePacketListenerMixin {
     ci.cancel();
 
     SignedVelocity.COMMAND_QUEUE.dataFrom(player.getUUID())
-        .nextResult()
+        .nextResult(true)
         .thenAccept(result -> {
           ((ServerCommonPacketListenerImplAccessor) (Object) this).signedVelocity$getServer()
               .execute(() -> {

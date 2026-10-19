@@ -38,7 +38,7 @@ public final class PlayerCommandListener implements EventListener<PlayerCommandP
 
         final Player player = event.getPlayer();
         this.commandQueue.dataFrom(player.getUniqueId())
-                .nextResult()
+                .nextResult(true)
                 .thenAccept(result -> {
                     if (result.cancelled()) {
                         debugLogger.debug(() -> "[COMMAND] Canceled Command. Command: " + event.getMessage());

@@ -44,7 +44,7 @@ public final class PlayerChatListener implements EventListener<AsyncChatEvent>, 
         final Player player = event.getPlayer();
         debugLogger.debug(() -> "[CHAT] Queueing Next Result");
         final QueuedData data = this.chatQueue.dataFrom(player.getUniqueId());
-        final CompletableFuture<SignedResult> nextResult = data.nextResult();
+        final CompletableFuture<SignedResult> nextResult = data.nextResult(false);
         debugLogger.debug(() -> "[CHAT] Future Done: " + nextResult.isDone());
         // In case the chat has really been executed from the player,
         // but some plugin has cancelled it by means of a deprecated event,
